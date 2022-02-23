@@ -1,0 +1,67 @@
+<%- include('../template/head')-%>
+<body class="text-center">
+    <div class="cover-container w-100 h-100 p-3 mx-auto flex-column">
+        <%- include('../template/nav')-%>
+        <main role="main" class="inner cover">
+            <%- include('../template/messages')-%>
+            <h1 class="cover-heading">Dodaj aplikaciju</h1>
+            <!--<form method="POST" enctype="multipart/form-data" action="/api/aplikacijaDodaj">
+                <div class="form-group">
+                    <label for="Name">Naziv</label>
+                    <input type="text" class="form-control" value="" id="name" name="ap_naziv" placeholder="Unesite naziv aplikacije" required>
+                </div>
+                <div class="form-group">
+                    <label for="Surname">Opis</label>
+                    <input type="text" class="form-control" value="" id="surname" name="ap_opis" placeholder="Unesite opis aplikacije" required>
+                </div>
+
+                <button type="submit" class="btn btn-dark" action="/api/datotekauploadDodajFile">Potvrdi</button>
+            </form>-->
+
+
+
+            <div class="row">
+                <div class="col-sm-8 mx-auto">
+                    <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                    <form method="POST" enctype="multipart/form-data" action="/api/aplikacijaDodaj" >
+
+                            <div class="form-group text-left controls mb-0 pb-2">
+                                <label>Naziv</label>
+                                <input class="form-control" id="name" name="ap_naziv" type="text" value="" required="required" data-validation-required-message="Molimo unesite naziv." />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                       
+                
+                            <div class="form-group text-left  controls mb-0 pb-2">
+                                <label>Opis</label>
+                                <textarea class="form-control"  class="form-control" value="" id="opis" name="ap_opis" rows="5" required="required" data-validation-required-message="Unesite opis"></textarea>
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        
+
+                        <br />
+                        <div id="success"></div>
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-xl" type="submit">Spremi </button>
+                        </div>
+                    </form>
+
+                    <!--ovo baš nemere tu, to treba else ako nije stisnuo spremi-->
+                    <a href="http://localhost:3014/api/aplikacijaPopis?idkorisnik=1"><i class="fas fa-reply fa-2x"></i></a>
+                
+            
+            </div>
+        </div>
+
+
+        </main>
+        <%- include('../template/footer')-%>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        document.getElementById('form').classList.add('active');
+    };
+</script>
+
+</html>

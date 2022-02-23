@@ -1,0 +1,96 @@
+<%- include('../template/head')-%>
+<body class="text-center">
+    <div class="cover-container  w-100 h-100 p-3 mx-auto flex-column">
+        <%- include('../template/nav')-%>
+        <main role="main" class="inner cover">
+            <%- include('../template/messages')-%>
+            <h1 class="cover-heading">Dodaj verziju aplikacije</h1>
+            <!--<h1 class="cover-heading">Dodaj verziju aplikacije</h1>
+            
+            <form method="POST" enctype="multipart/form-data" action="/api/datotekauploadDodajFile">
+                <div class="form-group">
+                    <label for="Verzija">Verzija</label>
+                    <input type="text" class="form-control" value="" id="name" name="du_verzija" placeholder="Unesite novu inačicu verzije" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="Verzija">Opis</label>
+                    <input type="text" class="form-control" value="" id="opis" name="du_opis" placeholder="opis">
+                </div>
+
+                <div class="form-group">
+                    <label for="file">file</label>
+                    <input type="file" class="form-control" name="file">
+                </div>
+
+                <input type="number" class="form-control" value="<%=idkorisnik %>" name="korisnik_idkorisnik"  hidden>
+                <input type="number" class="form-control" value="<%=idaplikacija %>"  name="aplikacija_idaplikacija"  hidden>
+            
+                <button type="submit" class="btn btn-dark" >Submit</button>
+            </form>-->
+
+
+                    <!-- Contact Section-->
+   
+       
+                <!-- Contact Section Heading
+                <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Dodaj verziju aplikacije</h2>
+                <div class="divider-custom">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
+                 Contact Section Form-->
+                <div class="row">
+                    <div class="col-sm-8 mx-auto">
+                        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on line 19.-->
+                        <form method="POST" enctype="multipart/form-data" action="/api/datotekauploadDodajFile" >
+                            
+                                <div class="form-group text-left controls mb-0 pb-2">
+                                    <label>Verzija</label>
+                                    <input class="form-control" id="name" name="du_verzija" type="text" required="required" data-validation-required-message="Molimo unesite verziju." />
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                           
+                    
+                                <div class="form-group text-left  controls mb-0 pb-2">
+                                    <label>Opis verzije</label>
+                                    <textarea class="form-control"  value="" id="opis" name="du_opis" rows="5" required="required" data-validation-required-message="Unesite opis tje sto je izmjenjeno."></textarea>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            
+                            
+                                <div class="form-group text-left  controls mb-0 pb-2">
+                                    <label>File:</label>
+                                    <input class="form-control-file" name="file" type="file"  required/>
+                                    <p class="help-block text-danger"></p>
+                                </div>
+                            
+
+                            <br />
+                            <div id="success"></div>
+                            <div class="form-group">
+                                <input type="number" class="form-control" value="<%=idkorisnik %>" name="korisnik_idkorisnik"  hidden>
+                                <input type="number" class="form-control" value="<%=idaplikacija %>"  name="aplikacija_idaplikacija"  hidden>
+
+                                <button class="btn btn-primary btn-xl"  type="submit">Spremi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+  
+
+
+
+
+        </main>
+        <%- include('../template/footer')-%>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        document.getElementById('form').classList.add('active');
+    };
+</script>
+
+</html>

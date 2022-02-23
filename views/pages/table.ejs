@@ -1,0 +1,265 @@
+<%- include('../template/head')-%>
+
+<style>
+
+body {font-family: Arial, Helvetica, sans-serif;}
+* {box-sizing: border-box;}
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+button:hover {
+  opacity:1;
+}
+
+/* Float cancel and delete buttons and add an equal width */
+.cancelbtn, .deletebtn {
+  float: left;
+  width: 50%;
+}
+
+/* Add a color to the cancel button */
+.cancelbtn {
+  background-color: #ccc;
+  color: black;
+}
+
+/* Add a color to the delete button */
+.deletebtn {
+  background-color: #f44336;
+}
+
+/* Add padding and center-align text to the container */
+.container {
+  padding: 16px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: #474e5d;
+  padding-top: 50px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+/* Style the horizontal ruler */
+hr {
+  border: 1px solid #f1f1f1;
+  margin-bottom: 25px;
+}
+ 
+/* The Modal Close Button (x) */
+.close {
+  position: absolute;
+  right: 35px;
+  top: 15px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #f1f1f1;
+}
+
+.close:hover,
+.close:focus {
+  color: #f44336;
+  cursor: pointer;
+}
+
+/* Clear floats */
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/*ne radi mi ovo baš 
+.nazad:hover{
+  opacity:1;
+}
+*/
+
+
+/*
+.bojanaslov{
+  color: #f1f1f1 !important;
+}*/
+
+/* Change styles for cancel button and delete button on extra small screens */
+@media screen and (max-width: 300px) {
+  .cancelbtn, .deletebtn {
+     width: 100%;
+  }
+}
+
+</style>
+
+<body class="text-center">
+    <div class="cover-container w-100 h-100 p-3 mx-auto flex-column">
+        <%- include('../template/nav')-%>
+       <h2 class="cover-heading"><%= title  %></h2>
+        
+       <% if(idkorisnik){ %>
+        <a href="/api/datotekauploadDodajForm?idkorisnik=1&idaplikacija=<%=idaplikacija%>"><i class="fas fa-plus fa-2x"></i></a>
+      <% } %>
+       
+
+        <div class="container bg-light text-dark">
+
+
+
+
+            <table class="table">
+              <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Naziv datoteke</th>
+                    <th scope="col">Opis</th>
+                    <th scope="col">Verzija</th>
+                    <th scope="col">Kapacitet</th>
+                    <th scope="col">Datum izmjene</th>
+
+                    <% if(idkorisnik){ %>
+                      <th scope="col">Uredi</th>
+                      <th scope="col">Obriši</th>
+                    <% } %>
+                </tr>
+              </thead>
+              <tbody>
+
+
+                <%
+                if(userData.length!=0){
+                var i=1;
+                userData.forEach(function(data){
+                %>
+                <tr>
+                  <th scope="col"><%= i %></th>
+                  <!--<td style="display:none;"><input id="idclipboard<%= i %>" type="text" value="http://localhost:3014/api/datotekauploadPreuzmi?du_putanja=<%= data.du_nazivdatoteka %>">   <button onclick="myFunctionCopyToClipboard('idclipboard<%= i %>')">Copy</button>  </td>
+                  --><td class="text-left">  
+                      <a href="/api/datotekauploadPreuzmi?du_putanja=<%= data.du_nazivdatoteka %>">  <i class="fas fa-download"></i></a>  
+                      <a onclick="myFunctionCopyToClipboard2('http://localhost:3014/api/datotekauploadPreuzmi?du_putanja=<%= data.du_nazivdatoteka %>')" href="#"> <i class="fas fa-link"></i></a>
+                      <!-- <a href="/api/datotekauploadPreuzmi?du_putanja=<%= data.du_nazivdatoteka %>"  target="_blank" ><%= data.du_nazivdatoteka %></a> -->
+                      <%= data.du_nazivdatoteka %>
+                    </td>
+                    <td class="text-left"><%=data.du_opis %></td>
+                    <td class="text-left"><%=data.du_verzija %></td>
+                    <td class="text-right"><%=(data.du_velicinedatoteke/1024/(1024)).toFixed(2) %> MB</td>
+                    <td><%=data.du_datumizmjene_prikaz %></td>
+
+                    <% if(idkorisnik){ %>
+                    <td><a href="/api/datotekaUploadPrikaziSqlJedna?iddatotekaupload=<%=data.iddatotekaupload%>&idkorisnik=1"><i class="fas fa-pen"></a></a></td>
+                    
+                    <td>
+                     <a onclick="document.getElementById('id01').style.display='block'; document.getElementById('obrsiaplikaciju').href='/api/datotekaUploadObrisi?iddatotekaupload=<%=data.iddatotekaupload%>&idkorisnik=1&idaplikacija=<%=data.aplikacija_idaplikacija%>'"  href="#"><i class="fas fa-trash"></i></a>
+                    </td>
+                    <% } %>
+
+                <%  i++; }) %>
+                <% } else{ %>
+
+                     
+    </div>
+  </form>
+
+                    <tr>
+                        <td colspan="8">No Data Found</td>
+                    </tr>
+                <% } %>
+
+              </tbody>
+            </table>
+
+            <!--<img alt="back" class="nazad" src="https://img.icons8.com/plasticine/60/000000/return.png" onclick="history.back()"/>-->
+            <% if(idkorisnik){ %>
+              <a href="/api/aplikacijaPopis?idkorisnik=1" ><i class="fas fa-reply fa-2x"></i></a>
+            <% } %>
+             
+        </div>
+        <%- include('../template/footer')-%>
+    </div>
+
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <form class="modal-content" action="/action_page.php">
+        <div class="container">
+          <h1  style="color: #005eac;">Obrisati verziju aplikacija?</h1>
+          <p  style="color: #005eac;">Jeste li sigurni da želite ukloniti verziju aplikacije?</p>
+        
+          <div class="clearfix">
+            <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Odustani</button>
+            <a  id="obrsiaplikaciju" href="" type="myButton" onclick="document.getElementById('id01').style.display='none'" class="deletebtn glokna">Obriši</a>
+          </div>
+        </div>
+      </form>
+    </div>
+
+</body>
+<script>
+    window.onload = function() {
+        document.getElementById('table').classList.add('active');
+      };
+
+      console.log('cukar');
+  // Get the modal
+var modal = document.getElementById('id01');
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+      document.getElementById('id01').addEventListener("click", myFunction);
+
+      function myFunction(){
+          console.log('asd');
+      }
+   
+
+function myFunctionCopyToClipboard(id) {
+  console.log(id);
+  var copyText = document.getElementById(id);
+  copyText.select();
+  copyText.setSelectionRange(0, 99999)
+  document.execCommand("copy");
+  //alert("Copied the text: " + copyText.value);
+}
+
+function myFunctionCopyToClipboard2(text) {
+  const el = document.createElement('textarea');
+  el.value = text;
+  el.setAttribute('readonly', '');
+  el.style.position = 'absolute';
+  el.style.left = '-9999px';
+  document.body.appendChild(el);
+  el.select();
+  document.execCommand('copy');
+  document.body.removeChild(el);
+}
+
+</script>
+
+
+</html>

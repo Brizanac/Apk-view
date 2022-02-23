@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>apkview</title>
+</head>
+<body>
+    <div class="table-data">
+<h2>Popis Aplikacija</h2>
+    <table border="1">
+        <tr>
+            <th>R br:</th>
+            <th>Naziv Aplikacije</th>
+            <th>Opis</th>
+            <th>Uredi</th>
+            <th>Obriši</th>
+        </tr>
+        
+        <%
+        if(userData.length!=0){
+        var i=1;
+        userData.forEach(function(data){
+        %>
+      
+         <tr>
+            <td><%=i; %></td>
+            <td><a href="/api/datotekaUploadPrikaziSql?idaplikacija=<%=data.idaplikacija%>&ap_naziv=<%=data.ap_naziv%>"><%=data.ap_naziv %></a></td>
+            <td><%=data.ap_opis %></td>
+            <td><a href="/api//<%=data.idaplikacija%>">Edit</a></td>
+            <td><a href="/api/aplikacijaObrisi?idaplikacija=<%=data.idaplikacija%>">Delete</a></td>
+        </tr>
+        <%  i++; }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Data Found</td>
+            </tr>
+        <% } %>
+    </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>apkview</title>
+</head>
+<body>
+    <div class="table-data">
+<h2><a href="/api/aplikacijaPopis?idkorisnik=1"><%= title  %></a> </h2>
+    <table border="1">
+        <tr>
+            <th>Naziv datoteke</th>
+            <th>Verzija</th>
+            <th>Kapacitet</th>
+            <th>Datum izmjene</th>
+            <th>Uredi</th>
+            <th>Obriši</th>
+        </tr>
+        
+        <%
+        if(userData.length!=0){
+        var i=1;
+        userData.forEach(function(data){
+        %>
+        <tr>
+            <td><%=data.du_nazivdatoteka%></td>
+            <td><%=data.du_verzija %></td>
+            <td><%=(data.du_velicinedatoteke/1024/(1024)).toFixed(2) %> MB</td>
+            <td><%=data.du_datumizmjene_prikaz %></td>
+            <td><a href="/api//<%=data.datotekaUploadPrikaziSql%>">Edit</a></td>
+            <td><a href="/api/datotekaUploadObrisi?iddatotekaupload=<%=data.iddatotekaupload%>">Delete</a></td>
+        </tr>
+        <%  i++; }) %>
+        <% } else{ %>
+            <tr>
+                <td colspan="7">No Data Found</td>
+            </tr>
+        <% } %>
+    </table>
+    </div>
+</body>
+</html>
